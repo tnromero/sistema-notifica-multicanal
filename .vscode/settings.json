@@ -1,0 +1,11 @@
+{
+    "python.envFile": "${workspaceFolder}/src/venv",
+    "python.testing.pytestArgs": [
+        "src"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    
+    // Exclude files and folders from the explorer view
+    "explorer.excludeGitIgnore": true
+}
