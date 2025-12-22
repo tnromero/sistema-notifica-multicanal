@@ -10,5 +10,5 @@ class InMemoryNotificationRepository(NotificationRepository):
     def save_notification(self, notification: Notification) -> None:
         self.notifications.append(notification)
 
-    def get_all(self) -> list[Notification]:
+    def get_all_notifications(self) -> list[Notification]:
         return self.notifications
