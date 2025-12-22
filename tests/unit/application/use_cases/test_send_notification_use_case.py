@@ -5,9 +5,10 @@ from notifications.domain.entities.notification_status import NotificationStatus
 
 def test_send_notification_use_case_success_primary(primary_notifier, fallback_notifier, notification_repository):
 
+    notifiers = [primary_notifier, fallback_notifier]
+
     use_case = SendNotificationUseCase(
-        primary_notifier=primary_notifier,
-        fallback_notifier=fallback_notifier,
+        notifiers=notifiers,
         notification_repository=notification_repository
     )
 
@@ -20,9 +21,10 @@ def test_send_notification_use_case_success_primary(primary_notifier, fallback_n
 def test_send_notification_use_case_success_fallback(primary_notifier, fallback_notifier, notification_repository):
     primary_notifier.send_notification.side_effect = Exception("Primary notifier failed - email not sent")
 
+    notifiers = [primary_notifier, fallback_notifier]
+    
     use_case = SendNotificationUseCase(
-        primary_notifier=primary_notifier,
-        fallback_notifier=fallback_notifier,
+        notifiers=notifiers,
         notification_repository=notification_repository
     )
 
@@ -36,9 +38,10 @@ def test_send_notification_use_case_failure_both(primary_notifier, fallback_noti
     primary_notifier.send_notification.side_effect = Exception("Primary notifier failed - email not sent")
     fallback_notifier.send_notification.side_effect = Exception("Fallback notifier failed - SMS not sent")
 
+    notifiers = [primary_notifier, fallback_notifier]
+
     use_case = SendNotificationUseCase(
-        primary_notifier=primary_notifier,
-        fallback_notifier=fallback_notifier,
+        notifiers=notifiers,
         notification_repository=notification_repository
     )
 

@@ -6,28 +6,25 @@ from notifications.domain.repositories.notification_repository import Notificati
 class SendNotificationUseCase:
     def __init__(
             self, 
-            primary_notifier: Notifier, 
-            fallback_notifier: Notifier,
+            notifiers: list[Notifier], 
             notification_repository: NotificationRepository
         ):
-        self.primary_notifier = primary_notifier
-        self.fallback_notifier = fallback_notifier
+        self.notifiers = notifiers
         self.notification_repository = notification_repository
 
     def execute(self, recipient: str, message: str) -> Notification:
         
         notification = Notification(recipient=recipient, message=message)
 
-        try:
-            self.primary_notifier.send_notification(recipient, message)
-            notification.status = NotificationStatus.SENT
-        
-        except Exception:
+        for notifier in self.notifiers:
             try:
-                self.fallback_notifier.send_notification(recipient, message)
+                notifier.send_notification(recipient, message)
                 notification.status = NotificationStatus.SENT
+                break
             except Exception:
-                notification.status = NotificationStatus.FAILED
+                continue
+        else:
+            notification.status = NotificationStatus.FAILED
         
         self.notification_repository.save_notification(notification)
         return notification
