@@ -19,8 +19,11 @@ where = ["src"]
 
 [project.optional-dependencies]
 dev = [
-  "pytest>=9.0.2",
-  "pytest-cov>=7.0.0"
+  "pytest==9.0.*",
+  "pytest-cov==7.0.*",
+  "black==25.12.*",
+  "ruff==0.14.*",
+  "pre-commit==4.5.*"
 ]
 
 [tool.pytest.ini_options]
@@ -28,3 +31,14 @@ testpaths = ["tests"]
 pythonpath = ["src"]
 addopts = "-ra -q"
 
+[tool.ruff]
+line-length = 88
+fix = true
+ignore = ["E501"]
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "I"]
+exclude = ["venv", ".venv", "__pycache__", "build", "dist"]
+
+[tool.black]
+line-length = 79

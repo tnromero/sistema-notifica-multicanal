@@ -12,10 +12,11 @@ from notifications.infrastructure.repositories.in_memory_notification_repository
     InMemoryNotificationRepository,
 )
 
-
 email_notifier: Notifier = EmailNotifier()
 sms_notifier: Notifier = SMSNotifier()
-notification_repository: NotificationRepository = InMemoryNotificationRepository()
+notification_repository: NotificationRepository = (
+    InMemoryNotificationRepository()
+)
 
 use_case_send_notification = SendNotificationUseCase(
     notifiers=[email_notifier, sms_notifier],

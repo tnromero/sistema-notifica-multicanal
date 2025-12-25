@@ -35,6 +35,7 @@ Este projeto é um sistema de notificações multicanal.
 2. Instale as dependências:
     ```bash
     pip install -e .[dev]
+    pre-commit install
     ```
 
 ## Executando os testes

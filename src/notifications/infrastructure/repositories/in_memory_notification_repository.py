@@ -1,6 +1,7 @@
-
 from notifications.domain.entities.notification import Notification
-from notifications.domain.repositories.notification_repository import NotificationRepository
+from notifications.domain.repositories.notification_repository import (
+    NotificationRepository,
+)
 
 
 class InMemoryNotificationRepository(NotificationRepository):

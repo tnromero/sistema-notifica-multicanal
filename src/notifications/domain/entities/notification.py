@@ -1,5 +1,8 @@
 from dataclasses import dataclass
-from notifications.domain.entities.notification_status import NotificationStatus
+
+from notifications.domain.entities.notification_status import (
+    NotificationStatus,
+)
 
 
 @dataclass
