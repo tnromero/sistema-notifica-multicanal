@@ -32,7 +32,7 @@ pythonpath = ["src"]
 addopts = "-ra -q"
 
 [tool.ruff]
-line-length = 88
+line-length = 79
 fix = true
 ignore = ["E501"]
 
